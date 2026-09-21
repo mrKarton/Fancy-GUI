@@ -1,0 +1,132 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/1_layer.png",
+      "ascent": 13,
+      "height": 35,
+      "chars": [
+        "\uE001"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/2_6_layer.png",
+      "ascent": -22,
+      "height": 18,
+      "chars": [
+        "\uE002"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/2_6_layer.png",
+      "ascent": -40,
+      "height": 18,
+      "chars": [
+        "\uE003"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/2_6_layer.png",
+      "ascent": -58,
+      "height": 18,
+      "chars": [
+        "\uE004"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/2_6_layer.png",
+      "ascent": -76,
+      "height": 18,
+      "chars": [
+        "\uE005"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/2_6_layer.png",
+      "ascent": -94,
+      "height": 18,
+      "chars": [
+        "\uE006"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/slot.png",
+      "ascent": -4,
+      "height": 18,
+      "chars": [
+        "\uE010"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/slot.png",
+      "ascent": -22,
+      "height": 18,
+      "chars": [
+        "\uE011"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/slot.png",
+      "ascent": -40,
+      "height": 18,
+      "chars": [
+        "\uE012"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/slot.png",
+      "ascent": -58,
+      "height": 18,
+      "chars": [
+        "\uE013"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/slot.png",
+      "ascent": -76,
+      "height": 18,
+      "chars": [
+        "\uE014"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/slot.png",
+      "ascent": -94,
+      "height": 18,
+      "chars": [
+        "\uE015"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "fancy-gui:gui/empty_slot.png",
+      "ascent": -94,
+      "height": 18,
+      "chars": [
+        "\uE016"
+      ]
+    },
+    {
+      "type": "space",
+      "advances": {
+        "\uE100": -8,
+        "\uE101": -177,
+        "\uE102": 8,
+        "\uE103": 19,
+        "\uE104": -162,
+        "\uE105": -1
+      }
+    }
+  ]
+}

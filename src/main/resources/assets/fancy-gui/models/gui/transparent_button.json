@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer1": "fancy-gui:gui/empty_slot.png"
+  }
+}
