@@ -21,37 +21,37 @@ public class ButtonsRegistrator {
                     )
             );
 
-    public static Button NEXT_BUTTON = registerButton(
+    public static ButtonItem nextButtonItem = registerButton(
             "next_button",
             Items.DIAMOND_SWORD
     );
 
-    public static Button PERVIOUS_BUTTON = registerButton(
+    public static ButtonItem perviousButtonItem = registerButton(
             "pervious_button",
             Items.DIAMOND_PICKAXE
     );
 
-    public static Button SEARCH_BUTTON = registerButton(
+    public static ButtonItem searchButtonItem = registerButton(
             "search_button",
             Items.SPYGLASS
     );
 
-    public static Button CHECKED_BUTTON = registerButton(
+    public static ButtonItem checkedButtonItem = registerButton(
             "checked_button",
             Items.AZALEA
     );
 
-    public static Button CROSS_BUTTON = registerButton(
+    public static ButtonItem crossButtonItem = registerButton(
             "cross_button",
             Items.AZALEA
     );
 
-    public static Button TRANSPARENT_BUTTON = registerButton(
+    public static ButtonItem transparentButtonItem = registerButton(
             "transparent_button",
             Items.AZALEA
     );
 
-    private static Button registerButton(String name, Item baseItem) {
+    private static ButtonItem registerButton(String name, Item baseItem) {
         Identifier buttonId = FancyGUI.id(name);
 
         ResourceKey<Item> buttonKey = ResourceKey.create(
@@ -66,7 +66,7 @@ public class ButtonsRegistrator {
         return Registry.register(
                 BuiltInRegistries.ITEM,
                 buttonKey,
-                new Button(
+                new ButtonItem(
                         new Item.Properties()
                                 .setId(buttonKey),
                         baseItem,

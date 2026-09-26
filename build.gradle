@@ -7,6 +7,17 @@ repositories {
 	maven { url 'https://maven.nucleoid.xyz' }
 }
 
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"fancy-gui" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
