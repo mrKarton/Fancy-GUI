@@ -70,7 +70,7 @@ public class TextInputSlotScreen
                                 Component.literal("")
                         )
                         .setItem(
-                                ButtonsRegistrator.transparentButtonItem
+                                ButtonsRegistrator.TRANSPARENT_BUTTON
                         )
         );
 

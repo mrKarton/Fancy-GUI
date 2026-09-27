@@ -16,6 +16,9 @@
     ],
     "client": [
       "com.karton.fancygui.client.FancyGUIClient"
+    ],
+    "fabric-datagen": [
+      "com.karton.fancygui.client.datagen.FancyGUIDataGenerator"
     ]
   },
   "depends": {

@@ -21,32 +21,32 @@ public class ButtonsRegistrator {
                     )
             );
 
-    public static ButtonItem nextButtonItem = registerButton(
+    public static ButtonItem NEXT_BUTTON = registerButton(
             "next_button",
             Items.DIAMOND_SWORD
     );
 
-    public static ButtonItem perviousButtonItem = registerButton(
+    public static ButtonItem PERVIUS_BUTTON = registerButton(
             "pervious_button",
             Items.DIAMOND_PICKAXE
     );
 
-    public static ButtonItem searchButtonItem = registerButton(
+    public static ButtonItem SEARCH_BUTTON = registerButton(
             "search_button",
             Items.SPYGLASS
     );
 
-    public static ButtonItem checkedButtonItem = registerButton(
+    public static ButtonItem CHECKED_BUTTON = registerButton(
             "checked_button",
             Items.AZALEA
     );
 
-    public static ButtonItem crossButtonItem = registerButton(
+    public static ButtonItem CROSS_BUTTON = registerButton(
             "cross_button",
             Items.AZALEA
     );
 
-    public static ButtonItem transparentButtonItem = registerButton(
+    public static ButtonItem TRANSPARENT_BUTTON = registerButton(
             "transparent_button",
             Items.AZALEA
     );

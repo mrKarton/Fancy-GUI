@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "fancy-gui:gui/gui_button_base",
   "textures": {
     "layer0": "fancy-gui:item/button_base",
     "layer1": "fancy-gui:item/cross"

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "fancy-gui:gui/checked_button"
+    "model": "fancy-gui:item/search_button"
   }
 }

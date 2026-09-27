@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "fancy-gui:gui/next_button"
+    "model": "fancy-gui:item/cross_button"
   }
 }
