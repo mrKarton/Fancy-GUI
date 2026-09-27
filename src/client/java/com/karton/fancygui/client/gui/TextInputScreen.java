@@ -1,5 +1,6 @@
 package com.karton.fancygui.client.gui;
 
+import com.karton.fancygui.FancyGUI;
 import com.karton.fancygui.network.ElementIds;
 import com.karton.fancygui.network.ScreenActionType;
 import com.karton.fancygui.network.ScreenElementData;
@@ -77,6 +78,9 @@ public class TextInputScreen extends SlotScreen {
                 applyingServerValue = false;
             }
         }
+        System.out.println("Setting input hint: " + inputData.secondaryText());
+
+
 
         inputBox.setHint(
                 inputData.secondaryText().isEmpty()
@@ -155,8 +159,8 @@ public class TextInputScreen extends SlotScreen {
          * В 26.3 одного setInitialFocus() недостаточно полагаться как на
          * источник истины для самого EditBox. Явно держим widget focused.
          */
-        setInitialFocus(inputBox);
-        inputBox.setFocused(true);
+//        setInitialFocus(inputBox);
+//        inputBox.setFocused(true);
     }
 
     @Override

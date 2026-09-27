@@ -56,6 +56,12 @@ public class FancyGUIModelProvider extends FabricModelProvider {
                 FancyGUI.id("item/cross"),
                 generator
         );
+
+        ButtonModelGenerator.generate(
+                ButtonsRegistrator.INFO_BUTTON,
+                FancyGUI.id("item/link"),
+                generator
+        );
     }
 
     @Override

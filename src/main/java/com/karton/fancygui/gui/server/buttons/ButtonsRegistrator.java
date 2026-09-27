@@ -46,6 +46,11 @@ public class ButtonsRegistrator {
             Items.AZALEA
     );
 
+    public static ButtonItem INFO_BUTTON = registerButton(
+            "info_button",
+            Items.AZALEA
+    );
+
     public static ButtonItem TRANSPARENT_BUTTON = registerButton(
             "transparent_button",
             Items.AZALEA

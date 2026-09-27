@@ -1,5 +1,6 @@
 package com.karton.fancygui.gui.menu;
 
+import com.karton.fancygui.network.ScreenType;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -67,7 +68,8 @@ public final class FancyMenu extends AbstractContainerMenu {
             Inventory inventory,
             int rows,
             int slotStartY,
-            Map<Integer, ItemStack> guiStacks
+            Map<Integer, ItemStack> guiStacks,
+            ScreenType screenType
     ) {
         FancyMenu menu = new FancyMenu(
                 containerId,
@@ -91,11 +93,16 @@ public final class FancyMenu extends AbstractContainerMenu {
                     stack != null ? stack.copy() : ItemStack.EMPTY
             );
 
-            int x = SLOT_START_X
-                    + (gridIndex % 9) * SLOT_SIZE;
+            int x = getSlotX(
+                    screenType,
+                    gridIndex
+            );
 
-            int y = slotStartY
-                    + (gridIndex / 9) * SLOT_SIZE;
+            int y = getSlotY(
+                    screenType,
+                    gridIndex,
+                    slotStartY
+            );
 
             menu.addGuiSlot(
                     gridIndex,
@@ -192,6 +199,41 @@ public final class FancyMenu extends AbstractContainerMenu {
 
     public int getGuiSlotCount() {
         return guiSlotCount;
+    }
+
+    public static int getSlotX(
+            ScreenType screenType,
+            int gridIndex
+    ) {
+        if (screenType == ScreenType.TEXT_INPUT) {
+            return switch (gridIndex) {
+                case 0 -> (176 - SLOT_SIZE) / 2; // 79, центр
+                case 1 -> SLOT_START_X;          // 8, слева
+                case 2 -> 176 - SLOT_START_X - SLOT_SIZE; // 150, справа
+                default ->
+                        SLOT_START_X
+                                + (gridIndex % 9) * SLOT_SIZE;
+            };
+        }
+
+        return SLOT_START_X
+                + (gridIndex % 9) * SLOT_SIZE;
+    }
+
+    public static int getSlotY(
+            ScreenType screenType,
+            int gridIndex,
+            int slotStartY
+    ) {
+        if (
+                screenType == ScreenType.TEXT_INPUT
+                        && gridIndex <= 2
+        ) {
+            return slotStartY;
+        }
+
+        return slotStartY
+                + (gridIndex / 9) * SLOT_SIZE;
     }
 
     public boolean hasGuiGridIndex(

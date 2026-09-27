@@ -16,12 +16,9 @@ public class TextInputScreenSession
         extends SlotScreenSession
         implements TextInputGUI {
 
-    /*
-     * 176px — ширина vanilla container.
-     * 80px визуально ближе к компактному rename/search field,
-     * а не к полосе на всю ширину окна.
-     */
-    private static final int INPUT_WIDTH = 80;
+
+    // 18px * 9cells
+    private static final int INPUT_WIDTH = 162;
     private static final int INPUT_HEIGHT = 18;
     private static final int INPUT_X = (176 - INPUT_WIDTH) / 2;
     private static final int INPUT_Y = 20;
@@ -48,10 +45,6 @@ public class TextInputScreenSession
 
     @Override
     protected int getSlotStartY() {
-        /*
-         * EditBox: y=20..37.
-         * Grid начинается с y=46 — остаётся нормальный зазор.
-         */
         return 46;
     }
 
@@ -96,11 +89,7 @@ public class TextInputScreenSession
                         ? payload.value()
                         : "";
 
-                if (submitCallback != null) {
-                    submitCallback.run();
-                } else {
-                    close(false);
-                }
+                submit();
 
                 return;
             }
@@ -113,9 +102,7 @@ public class TextInputScreenSession
     protected void onClientClosed() {
         super.onClientClosed();
 
-        if (cancelCallback != null) {
-            cancelCallback.run();
-        }
+        cancel();
     }
 
     @Override
@@ -142,6 +129,26 @@ public class TextInputScreenSession
             Runnable callback
     ) {
         this.cancelCallback = callback;
+    }
+
+    @Override
+    public void submit() {
+        if (submitCallback == null) {
+            this.close(false);
+            return;
+        }
+
+        submitCallback.run();
+    }
+
+    @Override
+    public void cancel() {
+        if (cancelCallback == null) {
+            this.close(false);
+            return;
+        }
+
+        cancelCallback.run();
     }
 
     public void setHint(String hint) {

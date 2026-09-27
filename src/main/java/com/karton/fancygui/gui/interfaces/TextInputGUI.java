@@ -6,4 +6,9 @@ public interface TextInputGUI extends SlotScreenGUI {
 
     void setSubmitCallback(Runnable func);
     void setCancelCallback(Runnable func);
+
+    void submit();
+    void cancel();
+
+    void setHint(String hint);
 }

@@ -65,6 +65,8 @@ public class SlotScreen
 
     protected Component displayTitle;
 
+    protected final ScreenType screenType;
+
     /** Buttons являются widgets, а НЕ Slot. */
     private final Map<Integer, ScreenElementData> buttons =
             new LinkedHashMap<>();
@@ -96,7 +98,8 @@ public class SlotScreen
                         inventory,
                         state.rows(),
                         slotStartY,
-                        collectInitialGuiStacks(state)
+                        collectInitialGuiStacks(state),
+                        state.screenType()
                 ),
                 inventory,
                 Component.literal(state.title()),
@@ -111,6 +114,7 @@ public class SlotScreen
         this.rows = state.rows();
         this.slotStartY = slotStartY;
         this.displayTitle = Component.literal(state.title());
+        this.screenType = state.screenType();
 
         applyState(state);
     }
@@ -225,16 +229,21 @@ public class SlotScreen
             int gridIndex
     ) {
         return leftPos
-                + SLOT_START_X
-                + (gridIndex % 9) * SLOT_SIZE;
+                + FancyMenu.getSlotX(
+                screenType,
+                gridIndex
+        );
     }
 
     protected final int getGridScreenY(
             int gridIndex
     ) {
         return topPos
-                + slotStartY
-                + (gridIndex / 9) * SLOT_SIZE;
+                + FancyMenu.getSlotY(
+                screenType,
+                gridIndex,
+                slotStartY
+        );
     }
 
     // ============================================================

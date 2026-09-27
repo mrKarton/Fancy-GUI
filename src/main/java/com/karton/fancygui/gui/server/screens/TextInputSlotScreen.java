@@ -18,6 +18,8 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 
+import java.util.List;
+
 public class TextInputSlotScreen
         extends AnvilInputGui
         implements TextInputGUI {
@@ -189,7 +191,7 @@ public class TextInputSlotScreen
     // ACTIONS
     // ============================================================
 
-    private void cancel() {
+    public void cancel() {
 
         if (cancelCallback == null) {
             this.close(false);
@@ -199,7 +201,7 @@ public class TextInputSlotScreen
         cancelCallback.run();
     }
 
-    private void submit() {
+    public void submit() {
 
         if (submitCallback == null) {
             this.close();
@@ -241,6 +243,17 @@ public class TextInputSlotScreen
                         : Component.empty();
 
         rebuildTitle();
+    }
+
+    @Override
+    public void setHint(String hint) {
+        super.setSlot(
+                0,
+                new GuiElementBuilder()
+                        .setName(Component.literal(""))
+                        .setLore(List.of(Component.literal(hint)))
+                        .setItem(ButtonsRegistrator.INFO_BUTTON)
+        );
     }
 
     // ============================================================
