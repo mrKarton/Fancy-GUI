@@ -1,6 +1,7 @@
 package com.karton.fancygui.gui.modded;
 
 import com.karton.fancygui.network.ScreenActionPayload;
+import com.karton.fancygui.network.ListViewClickPayload;
 
 import net.minecraft.server.level.ServerPlayer;
 
@@ -57,5 +58,14 @@ public final class FancyScreenManager {
         }
 
         session.handleAction(payload);
+    }
+
+    public static void handleListClick(ServerPlayer player, ListViewClickPayload payload) {
+        FancyScreenSession session = OPEN_SCREENS.get(player.getUUID());
+        if (session instanceof ListViewScreenSession list
+                && session.getScreenId() == payload.screenId()
+                && session.isOpened()) {
+            list.handleListClick(payload);
+        }
     }
 }

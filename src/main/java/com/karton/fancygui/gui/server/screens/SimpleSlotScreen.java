@@ -20,7 +20,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 
-public class SlotScreen extends SimpleGui implements SlotScreenGUI {
+public class SimpleSlotScreen extends SimpleGui implements SlotScreenGUI {
 
     private final FontDescription containerFont =
             new FontDescription.Resource(
@@ -40,7 +40,7 @@ public class SlotScreen extends SimpleGui implements SlotScreenGUI {
      * при buildCells(), поэтому тут сохраняем именно те значения,
      * которые передаются через NumberRange.
      */
-    private final ArrayList<Number> neededSlots =
+    protected final ArrayList<Number> neededSlots =
             new ArrayList<>();
 
     /**
@@ -56,7 +56,7 @@ public class SlotScreen extends SimpleGui implements SlotScreenGUI {
     private Component screenTitle =
             Component.empty();
 
-    public SlotScreen(
+    public SimpleSlotScreen(
             ServerPlayer player,
             String title,
             int rows
@@ -85,7 +85,7 @@ public class SlotScreen extends SimpleGui implements SlotScreenGUI {
      * чтобы NumberRange[] из OpenTestScreenCommand действительно
      * передавался SGUI backend'у.
      */
-    public SlotScreen(
+    public SimpleSlotScreen(
             ServerPlayer player,
             String title,
             int rows,

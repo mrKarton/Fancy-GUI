@@ -27,6 +27,16 @@ public final class FancyGUINetworking {
                         CloseScreenPayload.CODEC
                 );
 
+        PayloadTypeRegistry.clientboundPlay().register(
+                ListViewContentPayload.TYPE,
+                ListViewContentPayload.CODEC
+        );
+
+        PayloadTypeRegistry.serverboundPlay().register(
+                ListViewClickPayload.TYPE,
+                ListViewClickPayload.CODEC
+        );
+
         PayloadTypeRegistry
                 .serverboundPlay()
                 .register(
@@ -41,6 +51,13 @@ public final class FancyGUINetworking {
                                 context.player(),
                                 payload
                         )
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                ListViewClickPayload.TYPE,
+                (payload, context) -> FancyScreenManager.handleListClick(
+                        context.player(), payload
+                )
         );
     }
 

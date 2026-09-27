@@ -2,6 +2,7 @@ package com.karton.fancygui.gui;
 
 import com.karton.fancygui.gui.interfaces.SlotScreenGUI;
 import com.karton.fancygui.gui.modded.SlotScreenSession;
+import com.karton.fancygui.gui.server.screens.SimpleSlotScreen;
 import com.karton.fancygui.network.FancyGUINetworking;
 import com.karton.fancygui.util.NumberRange;
 
@@ -30,7 +31,7 @@ public class SlotScreen {
             return;
         }
 
-        this.gui = new com.karton.fancygui.gui.server.screens.SlotScreen(
+        this.gui = new SimpleSlotScreen(
                 player,
                 title,
                 verticalSize,

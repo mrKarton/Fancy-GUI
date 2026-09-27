@@ -1,19 +1,14 @@
 package com.karton.fancygui.gui;
 
 import com.karton.fancygui.gui.interfaces.TextInputGUI;
-import com.karton.fancygui.gui.modded.SlotScreenSession;
 import com.karton.fancygui.gui.modded.TextInputScreenSession;
-import com.karton.fancygui.gui.server.buttons.ButtonsRegistrator;
+import com.karton.fancygui.gui.server.screens.SimpleTextInputSlotScreen;
 import com.karton.fancygui.network.FancyGUINetworking;
 import com.karton.fancygui.util.NumberRange;
 
-import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TextInputScreen {
 
@@ -31,7 +26,7 @@ public class TextInputScreen {
             return;
         }
 
-        this.gui = new com.karton.fancygui.gui.server.screens.TextInputSlotScreen(
+        this.gui = new SimpleTextInputSlotScreen(
                 player,
                 title
         );

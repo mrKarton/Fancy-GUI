@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class TextInputSlotScreen
+public class SimpleTextInputSlotScreen
         extends AnvilInputGui
         implements TextInputGUI {
 
@@ -54,7 +54,7 @@ public class TextInputSlotScreen
     private Component background =
             Component.empty();
 
-    public TextInputSlotScreen(
+    public SimpleTextInputSlotScreen(
             ServerPlayer player,
             String title
     ) {

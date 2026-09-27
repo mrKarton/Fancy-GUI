@@ -2,7 +2,8 @@ package com.karton.fancygui.network;
 
 public enum ScreenType {
     SLOT(0),
-    TEXT_INPUT(1);
+    TEXT_INPUT(1),
+    LIST_VIEW(2);
 
     private final int id;
 
