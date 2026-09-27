@@ -165,6 +165,7 @@ public class SlotScreenSession
             int slotIndex,
             Slot slot
     ) {
+
         checkDeclaredSlot(slotIndex);
 
         if (slot == null) {
@@ -394,6 +395,30 @@ public class SlotScreenSession
         );
 
         serverMenu.setCarried(carried);
+    }
+
+    @Override
+    public void setCarried(ItemStack stack) {
+        if (serverMenu == null) {
+            return;
+        }
+
+        serverMenu.setCarried(
+                stack != null
+                        ? stack.copy()
+                        : ItemStack.EMPTY
+        );
+
+        sync();
+    }
+
+    @Override
+    public ItemStack getCarried() {
+        if (serverMenu == null) {
+            return ItemStack.EMPTY;
+        }
+
+        return serverMenu.getCarried().copy();
     }
 
     // ============================================================

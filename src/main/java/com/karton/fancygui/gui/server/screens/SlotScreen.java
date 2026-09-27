@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -363,6 +364,17 @@ public class SlotScreen extends SimpleGui implements SlotScreenGUI {
                     slot
             );
         }
+    }
+
+    @Override
+    public ItemStack getCarried() {
+        return player.containerMenu.getCarried();
+    }
+
+    @Override
+    public void setCarried(ItemStack stack) {
+        player.containerMenu.setCarried(stack);
+        player.containerMenu.broadcastChanges();
     }
 
     @Override

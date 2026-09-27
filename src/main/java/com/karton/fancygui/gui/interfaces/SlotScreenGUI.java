@@ -5,6 +5,7 @@ import com.karton.fancygui.util.NumberRange;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public interface SlotScreenGUI {
 
@@ -59,4 +60,8 @@ public interface SlotScreenGUI {
             }
         }
     }
+
+    ItemStack getCarried();
+
+    void setCarried(ItemStack stack);
 }

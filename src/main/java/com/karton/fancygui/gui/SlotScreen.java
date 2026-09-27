@@ -8,6 +8,7 @@ import com.karton.fancygui.util.NumberRange;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class SlotScreen {
 
@@ -77,4 +78,8 @@ public class SlotScreen {
     ) {
         gui.setSlot(slotIndex, slot);
     }
+
+    public ItemStack getCarried() {return gui.getCarried();}
+
+    public void setCarried(ItemStack stack) {gui.setCarried(stack);}
 }

@@ -17,6 +17,7 @@ import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -316,5 +317,16 @@ public class TextInputSlotScreen
                     slot
             );
         }
+    }
+
+    @Override
+    public ItemStack getCarried() {
+        return player.containerMenu.getCarried();
+    }
+
+    @Override
+    public void setCarried(ItemStack stack) {
+        player.containerMenu.setCarried(stack);
+        player.containerMenu.broadcastChanges();
     }
 }
