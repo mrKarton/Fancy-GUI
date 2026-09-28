@@ -1,8 +1,13 @@
 package com.karton.fancygui.gui;
 
 import com.karton.fancygui.gui.interfaces.ListViewGUI;
+import com.karton.fancygui.gui.interfaces.ListViewItemClickCallback;
+import com.karton.fancygui.gui.modded.ListViewScreenSession;
+import com.karton.fancygui.gui.modded.SlotScreenSession;
 import com.karton.fancygui.gui.server.buttons.ButtonsRegistrator;
 import com.karton.fancygui.gui.server.screens.SimpleListViewScreen;
+import com.karton.fancygui.network.FancyGUINetworking;
+import com.karton.fancygui.util.NumberRange;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -17,76 +22,47 @@ public class ListViewScreen {
 
     private final ListViewGUI gui;
 
-    private int page;
-    private final int MAX_PAGES;
-
     public ListViewScreen(
             ServerPlayer player,
             String title,
-            List<ItemStack> itemStackList
+            List<ItemStack> itemStackList,
+            NumberRange[] neededSlots
             ) {
         this.items = itemStackList;
         this.displayItems = itemStackList;
         this.title = title + this.items.size();
         this.player = player;
 
-        MAX_PAGES = Math.ceilDiv(this.items.size(), 36) - 1;
+        if (FancyGUINetworking.supportsClientGui(player)) {
+            this.gui = new ListViewScreenSession(
+                    player,
+                    title,
+                    displayItems,
+                    neededSlots
+            );
+            return;
+        }
 
         gui = new SimpleListViewScreen(
                 player,
-                title
+                title,
+                neededSlots
         );
 
-        gui.setButton(
-                45,
-                new Button(ButtonsRegistrator.PERVIUS_BUTTON)
-                        .withTitle("Предыдущая страница")
-                        .withAction(this::perviousPage)
-        );
-
-        gui.setButton(
-                53,
-                new Button(ButtonsRegistrator.NEXT_BUTTON)
-                        .withTitle("Следующая страница")
-                        .withAction(this::nextPage)
-        );
-
-        gui.setItemClickCallback(
-                (int i) -> {
-                    ItemStack stack = getItemsOnPage(page).get(i);
-                    player.sendSystemMessage(Component.literal("Вы выбрали " + stack.getItemName()));
-                }
-        );
-
-        gui.setDisplayItems(getItemsOnPage(0));
-    }
-
-    private void nextPage() {
-        if (page == MAX_PAGES) {
-            return;
-        }
-        this.page += 1;
-        gui.setDisplayItems(getItemsOnPage(this.page));
-    }
-
-    private void perviousPage() {
-        if (page == 0) {
-            return;
-        }
-        this.page -= 1;
-        gui.setDisplayItems(getItemsOnPage(this.page));
-    }
-
-    private List<ItemStack> getItemsOnPage(int page) {
-        int from = Math.max(0, page * 36);
-        int to = Math.min((page * 36) + 36, this.displayItems.size() - 1);
-        return this.displayItems.subList(
-                from,
-                to
-        );
+        gui.setDisplayItems(items);
     }
 
     public void open() {
         gui.open();
     }
+
+    public void setDisplayItems(List<ItemStack> items) {gui.setDisplayItems(items);}
+
+    public void close(boolean skipSync) {gui.close(skipSync);}
+
+    public void setItemClickCallback(ListViewItemClickCallback callback) {gui.setItemClickCallback(callback);}
+
+    public void setSearchCallback(Runnable callback) {gui.setSearchCallback(callback);}
+
+    public String getSearchInput() {return  gui.getSearchInput();}
 }

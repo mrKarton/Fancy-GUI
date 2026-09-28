@@ -8,6 +8,7 @@ import com.karton.fancygui.gui.server.buttons.ButtonsRegistrator;
 import com.karton.fancygui.util.NumberRange;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -17,12 +18,25 @@ import java.util.List;
 public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGUI {
     public final int ROWS = 6;
     private final NumberRange ITEMS_RANGE = new NumberRange(9, 44);
+    private List<ItemStack> items;
     private List<ItemStack> displayItems;
     private ListViewItemClickCallback itemClickCallback;
     private String search = "";
     private Runnable searchCallback;
+    private int page = 0;
+    private int maxPages = 0;
 
-    public SimpleListViewScreen(ServerPlayer player, String title) {
+    public SimpleListViewScreen(
+            ServerPlayer player,
+            String title,
+            NumberRange[] neededSlots
+    ) {
+        NumberRange busySlots = new NumberRange(0, 44);
+        for (NumberRange range : neededSlots) {
+            if (range.intersects(busySlots)) {
+                throw new IllegalArgumentException("Needed slots are intersects binded slots");
+            }
+        }
         super(
                 player,
                 title,
@@ -31,14 +45,38 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
                         new NumberRange(9, 44)
                 }
         );
+
+        super.setButton(
+                45,
+                new Button(ButtonsRegistrator.PERVIUS_BUTTON)
+                        .withTitle(Component.translatable("fancy-gui.simple-list-view.pervious-page"))
+                        .withAction(this::perviousPage)
+        );
+
+        super.setButton(
+                53,
+                new Button(ButtonsRegistrator.NEXT_BUTTON)
+                        .withTitle(Component.translatable("fancy-gui.simple-list-view.next-page"))
+                        .withAction(this::nextPage)
+        );
+
+        super.setButton(
+                8,
+                new Button(ButtonsRegistrator.SEARCH_BUTTON)
+                        .withTitle(Component.translatable("fancy-gui.simple-list-view.search"))
+                        .withAction(this::openSearchScreen)
+
+        );
     }
 
     @Override
     public void setDisplayItems(List<ItemStack> items) {
-        if (items.size() > 36) {
-            throw new IllegalArgumentException("Display items cont can't be more than 36");
-        }
-        this.displayItems = items;
+        this.items = items;
+
+        maxPages = Math.ceilDiv(this.items.size(), 36) - 1;
+        page = 0;
+
+        this.displayItems = getItemsOnPage(0);
 
         showItems();
     }
@@ -59,11 +97,71 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
                             .setCount(stack.getCount())
                             .setCallback(
                                     () -> {
-                                        itemClickCallback.onClick(i);
+                                        onClick(36 * page + i);
                                     }
                             )
             );
         }
+    }
+
+    private void onClick(int i) {
+        if (itemClickCallback != null) {
+            itemClickCallback.onClick(i);
+        }
+    }
+
+    private void nextPage() {
+        if (page == maxPages) {
+            return;
+        }
+        this.page += 1;
+        this.displayItems = getItemsOnPage(this.page);
+        showItems();
+    }
+
+    private void perviousPage() {
+        if (page == 0) {
+            return;
+        }
+        this.page -= 1;
+        this.displayItems = getItemsOnPage(this.page);
+        showItems();
+    }
+
+    private List<ItemStack> getItemsOnPage(int page) {
+        int from = Math.max(0, page * 36);
+        int to = Math.clamp(this.items.size() - 1, 0, (page * 36) + 36);
+        return this.items.subList(
+                from,
+                to
+        );
+    }
+
+    private void openSearchScreen() {
+        TextInputScreen screen = new TextInputScreen(
+                player,
+                Component.translatable("fancy-gui.simple-list-view.search").getString()
+        );
+
+        screen.setButton(
+                2,
+                new Button(ButtonsRegistrator.SEARCH_BUTTON)
+                        .withTitle(Component.translatable("fancy-gui.simple-list-view.search"))
+                        .withAction(
+                                () -> {
+                                    this.search = screen.getInput();
+                                    if (searchCallback != null) {
+                                        searchCallback.run();
+                                    }
+                                    screen.close();
+                                    this.open();
+                                }
+                        )
+        );
+
+        screen.setHint(Component.translatable("fancy-gui.simple-list-view.search-hint").getString());
+
+        screen.open();
     }
 
     @Override
@@ -73,7 +171,7 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
 
     @Override
     public void setSearchCallback(Runnable callback) {
-        searchCallback.run();
+        this.searchCallback = callback;
     }
 
     @Override

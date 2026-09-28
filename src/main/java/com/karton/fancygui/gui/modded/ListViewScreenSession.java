@@ -24,9 +24,25 @@ public class ListViewScreenSession extends SlotScreenSession implements ListView
     private Runnable searchCallback;
     private ListViewItemClickCallback itemClickCallback;
 
-    public ListViewScreenSession(ServerPlayer player, String title, List<ItemStack> items) {
-        super(player, ScreenType.LIST_VIEW, title, 6,
-                new NumberRange[]{new NumberRange(45, 53)});
+    public ListViewScreenSession(
+            ServerPlayer player,
+            String title,
+            List<ItemStack> items,
+            NumberRange[] neededSlots
+    ) {
+        NumberRange busySlots = new NumberRange(0, 44);
+        for (NumberRange range : neededSlots) {
+            if (range.intersects(busySlots)) {
+                throw new IllegalArgumentException("Needed slots are intersects binded slots");
+            }
+        }
+        super(
+                player,
+                ScreenType.LIST_VIEW,
+                title,
+                6,
+                neededSlots
+                );
         setDisplayItems(items);
     }
 

@@ -13,4 +13,9 @@ public record NumberRange (int from, int to) {
 
         return rangeArray;
     }
+
+    public boolean intersects(NumberRange other) {
+        return this.from <= other.to()
+                && other.from() <= this.to;
+    }
 }
