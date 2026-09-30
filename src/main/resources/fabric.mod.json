@@ -5,7 +5,8 @@
   "name": "Fancy GUI",
   "description": "Fancy GUI library with vanilla SGUI fallback and native modded-client screens.",
   "authors": [
-    "mrKarton"
+    "mrKarton",
+    "mBosed"
   ],
   "license": "MIT",
   "icon": "assets/fancy-gui/icon.png",
