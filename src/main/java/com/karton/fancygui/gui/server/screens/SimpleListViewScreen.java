@@ -12,6 +12,7 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.List;
 
@@ -41,9 +42,12 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
                 player,
                 title,
                 6,
-                new NumberRange[] {
-                        new NumberRange(9, 44)
-                }
+                ArrayUtils.addAll(
+                        new NumberRange[] {
+                                new NumberRange(9, 44),
+                        },
+                        neededSlots
+                )
         );
 
         super.setButton(
@@ -82,24 +86,22 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
     }
 
     private void showItems() {
-        for (int i : new NumberRange(0, 35).getRangeArray()) {
-            int slotIndex = 9+i;
-            if (this.displayItems.size() - 1 < i) {
+        for (int i = 0; i < 36; i++) {
+            int slotIndex = 9 + i;
+
+            if (i >= displayItems.size()) {
                 super.clearSlot(slotIndex);
                 continue;
             }
-            ItemStack stack = this.displayItems.get(i);
+
+            ItemStack stack = displayItems.get(i);
+
+            int itemIndex = 36 * page + i;
 
             super.setSlot(
                     slotIndex,
-                    new GuiElementBuilder()
-                            .setItem(stack.getItem())
-                            .setCount(stack.getCount())
-                            .setCallback(
-                                    () -> {
-                                        onClick(36 * page + i);
-                                    }
-                            )
+                    new GuiElementBuilder(stack)
+                            .setCallback(() -> onClick(itemIndex))
             );
         }
     }
@@ -129,12 +131,18 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
     }
 
     private List<ItemStack> getItemsOnPage(int page) {
-        int from = Math.max(0, page * 36);
-        int to = Math.clamp(this.items.size() - 1, 0, (page * 36) + 36);
-        return this.items.subList(
-                from,
-                to
+        int from = page * 36;
+
+        if (from >= this.items.size()) {
+            return List.of();
+        }
+
+        int to = Math.min(
+                this.items.size(),
+                from + 36
         );
+
+        return this.items.subList(from, to);
     }
 
     private void openSearchScreen() {

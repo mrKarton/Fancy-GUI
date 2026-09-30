@@ -10,12 +10,13 @@ import com.karton.fancygui.network.FancyGUINetworking;
 import com.karton.fancygui.util.NumberRange;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class ListViewScreen {
-    private final List<ItemStack> items;
+    private List<ItemStack> items;
     private List<ItemStack> displayItems;
     private final ServerPlayer player;
     private final String title;
@@ -56,6 +57,11 @@ public class ListViewScreen {
         gui.open();
     }
 
+    public void setItems(List<ItemStack> items) {
+        this.items = items;
+        setDisplayItems(items);
+    }
+
     public void setDisplayItems(List<ItemStack> items) {gui.setDisplayItems(items);}
 
     public void close(boolean skipSync) {gui.close(skipSync);}
@@ -65,4 +71,28 @@ public class ListViewScreen {
     public void setSearchCallback(Runnable callback) {gui.setSearchCallback(callback);}
 
     public String getSearchInput() {return  gui.getSearchInput();}
+
+
+    public void setSlot(int slotIndex, Slot slot) {
+        this.gui.setSlot(slotIndex, slot);
+    }
+
+    public void setButton(int buttonIndex, Button button) {
+        this.gui.setButton(buttonIndex, button);
+    }
+
+    /// Currently only sgui fallback supported
+    public void clearSlot(int slotIndex) {
+        if (this.gui instanceof SimpleListViewScreen sgui) {
+            sgui.clearSlot(slotIndex);
+        }
+    }
+
+    public void setCarried(ItemStack carried) {
+        gui.setCarried(carried);
+    }
+
+    public ItemStack getCarried() {
+        return gui.getCarried();
+    }
 }
