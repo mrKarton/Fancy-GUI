@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Server-side native SlotScreen session.
@@ -237,7 +238,11 @@ public class SlotScreenSession
                                             button.getClientHeight()
                                     ),
                                     button.getTitle().getString(),
-                                    button.getCaption().getString(),
+                                    button.getCaption()
+                                            .lines()
+                                            .stream()
+                                            .map(Component::getString)
+                                            .collect(Collectors.joining("\n")),
                                     new ItemStack(
                                             button.getItem()
                                     )

@@ -30,6 +30,8 @@ dependencies {
 	implementation ("eu.pb4:polymer-autohost:0.18.2+26.3")
 	implementation ("eu.pb4:polymer-resource-pack:0.18.2+26.3")
 
+	implementation include ("xyz.nucleoid:server-translations-api:3.2.0+26.3")
+
 	implementation ("eu.pb4:sgui:2.2.0+26.3")
 }
 

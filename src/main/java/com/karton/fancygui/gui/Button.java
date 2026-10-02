@@ -3,13 +3,15 @@ package com.karton.fancygui.gui;
 import com.karton.fancygui.gui.server.buttons.ButtonItem;
 import com.karton.fancygui.gui.server.buttons.ServerButton;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemLore;
 
 public class Button {
 
     private final ButtonItem item;
 
     private Component title = Component.empty();
-    private Component caption = Component.empty();
+    private ItemLore caption = ItemLore.EMPTY;
 
     /**
      * Выполняется ТОЛЬКО на сервере.
@@ -47,7 +49,12 @@ public class Button {
     }
 
     public Button withCaption(Component caption) {
-        this.caption = caption;
+        this.caption = this.caption.withLineAdded(caption);
+        return this;
+    }
+
+    public Button withAllCaption(ItemLore lore) {
+        this.caption = lore;
         return this;
     }
 
@@ -73,7 +80,7 @@ public class Button {
         return title;
     }
 
-    public Component getCaption() {
+    public ItemLore getCaption() {
         return caption;
     }
 

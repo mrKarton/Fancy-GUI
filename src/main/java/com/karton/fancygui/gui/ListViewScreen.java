@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import xyz.nucleoid.server.translations.api.Localization;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ public class ListViewScreen {
         );
 
         gui.setDisplayItems(items);
+
+        setSearchCallback(this::defaultSearchCallbac);
     }
 
     public void open() {
@@ -88,11 +91,36 @@ public class ListViewScreen {
         }
     }
 
+    public void setTitle(Component title) {
+        gui.setTitle(title);
+    }
+
     public void setCarried(ItemStack carried) {
         gui.setCarried(carried);
     }
 
     public ItemStack getCarried() {
         return gui.getCarried();
+    }
+
+    private void defaultSearchCallbac() {
+        String search = gui.getSearchInput();
+        if (search.isEmpty()) {
+            setDisplayItems(items);
+        }
+        List<ItemStack> filtered = items.stream()
+                .filter(
+                        (ItemStack stack) -> {
+                            String itemKey = stack.getItem().getDescriptionId();
+                            String stackName = Localization.component(
+                                    stack.getHoverName(),
+                                    player
+                            ).getString();
+
+                            return stackName.toLowerCase().contains(search.toLowerCase());
+                        }
+                ).toList();
+
+        setDisplayItems(filtered);
     }
 }

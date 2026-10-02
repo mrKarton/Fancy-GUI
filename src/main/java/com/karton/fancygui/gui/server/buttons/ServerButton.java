@@ -34,19 +34,10 @@ public class ServerButton implements GuiElement {
         );
     }
 
-    public void setCaption(Component caption) {
-        if (caption == null || caption.equals(Component.empty())) {
-            return;
-        }
-
+    public void setCaption(ItemLore lore) {
         stack.set(
                 DataComponents.LORE,
-                new ItemLore(
-                        List.of(
-                                caption.copy()
-                                        .withStyle(SguiUtils.STYLE_CLEARER)
-                        )
-                )
+                lore
         );
     }
 

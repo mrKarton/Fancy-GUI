@@ -64,13 +64,13 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
                         .withAction(this::nextPage)
         );
 
-        super.setButton(
-                8,
-                new Button(ButtonsRegistrator.SEARCH_BUTTON)
-                        .withTitle(Component.translatable("fancy-gui.simple-list-view.search"))
-                        .withAction(this::openSearchScreen)
-
-        );
+//        super.setButton(
+//                8,
+//                new Button(ButtonsRegistrator.SEARCH_BUTTON)
+//                        .withTitle(Component.translatable("fancy-gui.simple-list-view.search"))
+//                        .withAction(this::openSearchScreen)
+//
+//        );
     }
 
     @Override
