@@ -32,6 +32,8 @@ public class SimpleSlotScreen extends SimpleGui implements SlotScreenGUI {
 
     private final int rows;
 
+    private Runnable onCloseCallback;
+
     /**
      * Слоты, которые должны визуально отображаться
      * как доступные/активные.
@@ -281,6 +283,25 @@ public class SimpleSlotScreen extends SimpleGui implements SlotScreenGUI {
         );
     }
 
+    @Override
+    public void onPlayerClose(boolean success) {
+        super.onPlayerClose(success);
+
+        if (success) {
+            if (this.onCloseCallback != null) {
+                this.onCloseCallback.run();
+            }
+        }
+    }
+
+
+    @Override
+    public void onManualClose() {
+        if (this.onCloseCallback != null) {
+            this.onCloseCallback.run();
+        }
+    }
+
     // ============================================================
     // TITLE
     // ============================================================
@@ -375,6 +396,11 @@ public class SimpleSlotScreen extends SimpleGui implements SlotScreenGUI {
     public void setCarried(ItemStack stack) {
         player.containerMenu.setCarried(stack);
         player.containerMenu.broadcastChanges();
+    }
+
+    @Override
+    public void setOnCloseCallback(Runnable closeCallback) {
+        this.onCloseCallback = closeCallback;
     }
 
     @Override

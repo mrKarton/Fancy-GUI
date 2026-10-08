@@ -64,4 +64,6 @@ public interface SlotScreenGUI {
     ItemStack getCarried();
 
     void setCarried(ItemStack stack);
+
+    void setOnCloseCallback(Runnable closeCallback);
 }

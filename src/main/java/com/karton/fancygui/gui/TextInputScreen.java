@@ -94,4 +94,8 @@ public class TextInputScreen {
     public void setCancelCallback(Runnable callback) {
         gui.setCancelCallback(callback);
     }
+
+    public void setOnCloseCallback(Runnable callback) {
+        gui.setOnCloseCallback(callback);
+    }
 }

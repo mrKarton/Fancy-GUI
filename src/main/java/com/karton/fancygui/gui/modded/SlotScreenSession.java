@@ -39,6 +39,7 @@ public class SlotScreenSession
         implements SlotScreenGUI {
 
     private final int rows;
+    private Runnable closeCallback;
 
     /**
      * Единственные существующие FancyGUI grid slots.
@@ -418,6 +419,11 @@ public class SlotScreenSession
     }
 
     @Override
+    public void setOnCloseCallback(Runnable closeCallback) {
+        this.closeCallback = closeCallback;
+    }
+
+    @Override
     public ItemStack getCarried() {
         if (serverMenu == null) {
             return ItemStack.EMPTY;
@@ -439,6 +445,10 @@ public class SlotScreenSession
     @Override
     protected void onClientClosed() {
         cleanupServerMenu();
+
+        if (closeCallback != null) {
+            closeCallback.run();
+        }
     }
 
     @Override

@@ -83,4 +83,8 @@ public class SlotScreen {
     public ItemStack getCarried() {return gui.getCarried();}
 
     public void setCarried(ItemStack stack) {gui.setCarried(stack);}
+
+    public void setOnCloseCallback(Runnable callback) {
+        gui.setOnCloseCallback(callback);
+    }
 }

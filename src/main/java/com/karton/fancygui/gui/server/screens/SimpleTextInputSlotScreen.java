@@ -329,4 +329,9 @@ public class SimpleTextInputSlotScreen
         player.containerMenu.setCarried(stack);
         player.containerMenu.broadcastChanges();
     }
+
+    @Override
+    public void setOnCloseCallback(Runnable closeCallback) {
+
+    }
 }

@@ -123,4 +123,8 @@ public class ListViewScreen {
 
         setDisplayItems(filtered);
     }
+
+    public void setOnCloseCallback(Runnable callback) {
+        gui.setOnCloseCallback(callback);
+    }
 }
