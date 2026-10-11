@@ -58,6 +58,8 @@ public class TextInputScreen {
 
     public void setHint(String hint) { gui.setHint(hint); }
 
+
+
     public void setButton(
             int slotIndex,
             Button button

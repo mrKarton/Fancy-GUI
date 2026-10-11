@@ -257,6 +257,18 @@ public class SimpleTextInputSlotScreen
         );
     }
 
+    @Override
+    public void setHint(Component hint) {
+        super.setSlot(
+                0,
+                new GuiElementBuilder()
+                        .setName(Component.literal(""))
+                        .setLore(List.of(hint))
+                        .setItem(ButtonsRegistrator.INFO_BUTTON)
+
+        );
+    }
+
     // ============================================================
     // BUTTONS
     // ============================================================

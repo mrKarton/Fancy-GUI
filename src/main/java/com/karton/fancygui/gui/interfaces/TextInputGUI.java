@@ -1,5 +1,7 @@
 package com.karton.fancygui.gui.interfaces;
 
+import net.minecraft.network.chat.Component;
+
 public interface TextInputGUI extends SlotScreenGUI {
     void setOnInputCallback(Runnable callback);
     String getInput();
@@ -11,4 +13,5 @@ public interface TextInputGUI extends SlotScreenGUI {
     void cancel();
 
     void setHint(String hint);
+    void setHint(Component hint);
 }

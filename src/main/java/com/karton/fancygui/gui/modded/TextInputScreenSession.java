@@ -8,6 +8,7 @@ import com.karton.fancygui.network.ScreenElementData;
 import com.karton.fancygui.network.ScreenType;
 import com.karton.fancygui.util.NumberRange;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
@@ -154,5 +155,10 @@ public class TextInputScreenSession
     public void setHint(String hint) {
         this.hint = hint != null ? hint : "";
         syncIfOpened();
+    }
+
+    @Override
+    public void setHint(Component hint) {
+        this.hint = hint.getString();
     }
 }
