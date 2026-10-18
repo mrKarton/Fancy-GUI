@@ -1,9 +1,35 @@
 # Fancy GUI
+A simple modern GUI library for minecraft fabric
+## Uasage
 
-## Setup
+Add Github maven repository to your build.grafle:
+```
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/mrkarton/Fancy-GUI")
 
-For setup instructions, please see the [Fabric Documentation page](https://docs.fabricmc.net/develop/getting-started/creating-a-project#setting-up) related to the IDE that you are using.
+        content {
+            includeGroup("com.karton.fancygui")
+        }
 
-## License
+        credentials {
+            username = providers.gradleProperty("gpr.user")
+                    .orElse(providers.environmentVariable("GITHUB_ACTOR"))
+                    .getOrNull()
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+            password = providers.gradleProperty("gpr.key")
+                    .orElse(providers.environmentVariable("GITHUB_TOKEN"))
+                    .getOrNull()
+        }
+    }
+
+    // Needed to FancyGUI dependencies
+    maven {
+        url = uri("https://maven.nucleoid.xyz")
+    }
+}
+
+dependencies {
+    implementation "com.karton.fancygui:fancy-gui:0.3.2"
+}
+```

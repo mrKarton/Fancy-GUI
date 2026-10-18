@@ -78,15 +78,46 @@ jar {
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
+			groupId = project.group.toString()
+			artifactId = "fancy-gui"
+			version = project.version.toString()
+
 			from components.java
+
+			pom {
+				name = "Fancy GUI"
+				description = "Fabric GUI library with SGUI fallback and native client screens."
+				url = "https://github.com/mrKarton/Fancy-GUI"
+
+				licenses {
+					license {
+						name = "MIT"
+						url = "https://opensource.org/licenses/MIT"
+					}
+				}
+
+				scm {
+					url = "https://github.com/mrKarton/Fancy-GUI"
+					connection = "scm:git:https://github.com/mrKarton/Fancy-GUI.git"
+				}
+			}
 		}
 	}
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/mrkarton/Fancy-GUI")
+
+			credentials {
+				username = providers.gradleProperty("gpr.user")
+						.orElse(providers.environmentVariable("GITHUB_ACTOR"))
+						.getOrNull()
+
+				password = providers.gradleProperty("gpr.key")
+						.orElse(providers.environmentVariable("GITHUB_TOKEN"))
+						.getOrNull()
+			}
+		}
 	}
 }
