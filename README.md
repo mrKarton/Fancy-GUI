@@ -1,4 +1,6 @@
 # Fancy GUI
+[![](https://jitpack.io/v/mrKarton/Fancy-GUI.svg)](https://jitpack.io/#mrKarton/Fancy-GUI) 
+
 A simple modern GUI library for minecraft fabric
 ## Uasage
 

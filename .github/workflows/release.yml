@@ -54,7 +54,7 @@ jobs:
           version = properties["version"]
           tag = os.environ["RELEASE_TAG"]
 
-          if tag != f"v{version}":
+          if tag != f"{version}":
               raise SystemExit(
                   f"Tag {tag!r} must match project version: v{version}"
               )
