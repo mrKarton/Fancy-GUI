@@ -33,7 +33,7 @@ public class TextInputScreenSession
 
     public TextInputScreenSession(
             ServerPlayer player,
-            String title
+            Component title
     ) {
         super(
                 player,

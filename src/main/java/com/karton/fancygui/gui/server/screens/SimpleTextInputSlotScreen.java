@@ -56,7 +56,7 @@ public class SimpleTextInputSlotScreen
 
     public SimpleTextInputSlotScreen(
             ServerPlayer player,
-            String title
+            Component title
     ) {
         super(player, false);
 

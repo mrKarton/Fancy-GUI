@@ -62,7 +62,7 @@ public class SlotScreenSession
 
     public SlotScreenSession(
             ServerPlayer player,
-            String title,
+            Component title,
             int rows,
             NumberRange[] neededSlots
     ) {
@@ -78,16 +78,14 @@ public class SlotScreenSession
     protected SlotScreenSession(
             ServerPlayer player,
             ScreenType screenType,
-            String title,
+            Component title,
             int rows,
             NumberRange[] neededSlots
     ) {
         super(
                 player,
                 screenType,
-                Component.literal(
-                        title != null ? title : ""
-                )
+                title
         );
 
         if (rows < 1 || rows > 6) {

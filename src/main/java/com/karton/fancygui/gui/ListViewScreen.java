@@ -16,23 +16,24 @@ import xyz.nucleoid.server.translations.api.Localization;
 
 import java.util.List;
 
-public class ListViewScreen {
+public class ListViewScreen implements ListViewGUI {
     private List<ItemStack> items;
     private List<ItemStack> displayItems;
     private final ServerPlayer player;
-    private final String title;
+    private final Component title;
 
     private final ListViewGUI gui;
 
+
     public ListViewScreen(
             ServerPlayer player,
-            String title,
+            Component title,
             List<ItemStack> itemStackList,
             NumberRange[] neededSlots
-            ) {
+    ) {
         this.items = itemStackList;
         this.displayItems = itemStackList;
-        this.title = title + this.items.size();
+        this.title = title;
         this.player = player;
 
         if (FancyGUINetworking.supportsClientGui(player)) {
@@ -56,8 +57,24 @@ public class ListViewScreen {
         setSearchCallback(this::defaultSearchCallbac);
     }
 
-    public void open() {
-        gui.open();
+
+    public ListViewScreen(
+            ServerPlayer player,
+            String title,
+            List<ItemStack> itemStackList,
+            NumberRange[] neededSlots
+            ) {
+        this(
+                player,
+                Component.literal(title != null ? title : ""),
+                itemStackList,
+                neededSlots
+        );
+    }
+
+
+    public boolean open() {
+        return gui.open();
     }
 
     public void setItems(List<ItemStack> items) {
@@ -89,6 +106,16 @@ public class ListViewScreen {
         if (this.gui instanceof SimpleListViewScreen sgui) {
             sgui.clearSlot(slotIndex);
         }
+    }
+
+    @Override
+    public int getRows() {
+        return gui.getRows();
+    }
+
+    @Override
+    public void setTitle(String text) {
+        setTitle(Component.literal(text != null ? text : ""));
     }
 
     public void setTitle(Component title) {

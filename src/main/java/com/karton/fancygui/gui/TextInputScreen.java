@@ -9,14 +9,25 @@ import com.karton.fancygui.util.NumberRange;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
-public class TextInputScreen {
+public class TextInputScreen implements TextInputGUI {
 
     private final TextInputGUI gui;
 
     public TextInputScreen(
             ServerPlayer player,
             String title
+    ) {
+        this (
+                player,
+                Component.literal(title != null ? title : "")
+        );
+    }
+
+    public TextInputScreen(
+            ServerPlayer player,
+            Component title
     ) {
         if (FancyGUINetworking.supportsClientGui(player)) {
             this.gui = new TextInputScreenSession(
@@ -32,8 +43,13 @@ public class TextInputScreen {
         );
     }
 
-    public void open() {
-        gui.open();
+    public boolean open() {
+        return gui.open();
+    }
+
+    @Override
+    public void close(boolean skipSync) {
+        gui.close(skipSync);
     }
 
     public void close() {
@@ -79,6 +95,16 @@ public class TextInputScreen {
             Slot slot
     ) {
         gui.setSlot(slotIndex, slot);
+    }
+
+    @Override
+    public ItemStack getCarried() {
+        return gui.getCarried();
+    }
+
+    @Override
+    public void setCarried(ItemStack stack) {
+        gui.setCarried(stack);
     }
 
     public void setOnInputCallback(Runnable callback) {

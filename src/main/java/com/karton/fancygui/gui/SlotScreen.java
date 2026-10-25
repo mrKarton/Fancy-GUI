@@ -11,13 +11,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class SlotScreen {
+import java.util.List;
+
+public class SlotScreen implements SlotScreenGUI {
 
     private final SlotScreenGUI gui;
 
     public SlotScreen(
             ServerPlayer player,
-            String title,
+            Component title,
             int verticalSize,
             NumberRange[] neededSlots
     ) {
@@ -39,12 +41,56 @@ public class SlotScreen {
         );
     }
 
+    public SlotScreen(
+            ServerPlayer player,
+            String title,
+            int verticalSize,
+            NumberRange[] neededSlots
+    ) {
+        this (
+                player,
+                Component.literal(title != null ? title : ""),
+                verticalSize,
+                neededSlots
+        );
+    }
+
+    public SlotScreen(
+            ServerPlayer player,
+            Component title,
+            int verticalSize
+    ) {
+        this(
+                player,
+                title,
+                verticalSize,
+                new NumberRange[0]
+        );
+    }
+
+    public SlotScreen(
+            ServerPlayer player,
+            String title,
+            int verticalSize
+    ) {
+        this(
+                player,
+                Component.literal(title != null ? title : ""),
+                verticalSize
+        );
+    }
+
     public int getRows() {
         return gui.getRows();
     }
 
-    public void open() {
-        gui.open();
+    public boolean open() {
+        return gui.open();
+    }
+
+    @Override
+    public void close(boolean skipSync) {
+        gui.close(skipSync);
     }
 
     public void setButton(

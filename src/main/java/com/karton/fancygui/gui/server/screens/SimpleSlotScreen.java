@@ -89,7 +89,7 @@ public class SimpleSlotScreen extends SimpleGui implements SlotScreenGUI {
      */
     public SimpleSlotScreen(
             ServerPlayer player,
-            String title,
+            Component title,
             int rows,
             NumberRange[] neededSlots
     ) {

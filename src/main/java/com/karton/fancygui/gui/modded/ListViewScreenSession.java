@@ -11,6 +11,7 @@ import com.karton.fancygui.network.ScreenElementData;
 import com.karton.fancygui.network.ScreenType;
 import com.karton.fancygui.util.NumberRange;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
@@ -26,7 +27,7 @@ public class ListViewScreenSession extends SlotScreenSession implements ListView
 
     public ListViewScreenSession(
             ServerPlayer player,
-            String title,
+            Component title,
             List<ItemStack> items,
             NumberRange[] neededSlots
     ) {

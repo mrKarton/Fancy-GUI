@@ -29,7 +29,7 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
 
     public SimpleListViewScreen(
             ServerPlayer player,
-            String title,
+            Component title,
             NumberRange[] neededSlots
     ) {
         NumberRange busySlots = new NumberRange(0, 44);
