@@ -2,6 +2,7 @@ package com.karton.fancygui.gui;
 
 import com.karton.fancygui.gui.interfaces.SlotScreenGUI;
 import com.karton.fancygui.gui.modded.SlotScreenSession;
+import com.karton.fancygui.gui.server.screens.SimpleListViewScreen;
 import com.karton.fancygui.gui.server.screens.SimpleSlotScreen;
 import com.karton.fancygui.network.FancyGUINetworking;
 import com.karton.fancygui.util.NumberRange;
@@ -132,5 +133,11 @@ public class SlotScreen implements SlotScreenGUI {
 
     public void setOnCloseCallback(Runnable callback) {
         gui.setOnCloseCallback(callback);
+    }
+
+    public void enableSearchButton() {
+        if (gui instanceof SimpleListViewScreen sgui) {
+            sgui.enableSearchButton();
+        }
     }
 }

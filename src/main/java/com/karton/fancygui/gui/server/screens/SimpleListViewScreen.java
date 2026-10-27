@@ -64,13 +64,7 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
                         .withAction(this::nextPage)
         );
 
-//        super.setButton(
-//                8,
-//                new Button(ButtonsRegistrator.SEARCH_BUTTON)
-//                        .withTitle(Component.translatable("fancy-gui.simple-list-view.search"))
-//                        .withAction(this::openSearchScreen)
-//
-//        );
+
     }
 
     @Override
@@ -238,5 +232,15 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
     @Override
     public void setCarried(ItemStack stack) {
         super.setCarried(stack);
+    }
+
+    public void enableSearchButton() {
+        super.setButton(
+                8,
+                new Button(ButtonsRegistrator.SEARCH_BUTTON)
+                .withTitle(Component.translatable("fancy-gui.simple-list-view.search"))
+                .withAction(this::openSearchScreen)
+
+        );
     }
 }
