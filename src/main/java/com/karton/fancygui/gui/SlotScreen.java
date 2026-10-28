@@ -134,10 +134,4 @@ public class SlotScreen implements SlotScreenGUI {
     public void setOnCloseCallback(Runnable callback) {
         gui.setOnCloseCallback(callback);
     }
-
-    public void enableSearchButton() {
-        if (gui instanceof SimpleListViewScreen sgui) {
-            sgui.enableSearchButton();
-        }
-    }
 }

@@ -142,7 +142,7 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
     private void openSearchScreen() {
         TextInputScreen screen = new TextInputScreen(
                 player,
-                Component.translatable("fancy-gui.simple-list-view.search").getString()
+                Component.translatable("fancy-gui.simple-list-view.search")
         );
 
         screen.setButton(
@@ -161,7 +161,7 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
                         )
         );
 
-        screen.setHint(Component.translatable("fancy-gui.simple-list-view.search-hint").getString());
+        screen.setHint(Component.translatable("fancy-gui.simple-list-view.search-hint"));
 
         screen.open();
     }
