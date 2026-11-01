@@ -31,7 +31,7 @@ public class ListViewScreenSession extends SlotScreenSession implements ListView
             List<ItemStack> items,
             NumberRange[] neededSlots
     ) {
-        NumberRange busySlots = new NumberRange(0, 44);
+        NumberRange busySlots = new NumberRange(5, 44);
         for (NumberRange range : neededSlots) {
             if (range.intersects(busySlots)) {
                 throw new IllegalArgumentException("Needed slots are intersects binded slots");
