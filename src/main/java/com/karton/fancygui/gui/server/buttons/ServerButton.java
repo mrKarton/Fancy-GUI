@@ -5,6 +5,7 @@ import eu.pb4.sgui.api.elements.GuiElement;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemLore;
 
@@ -14,10 +15,10 @@ public class ServerButton implements GuiElement {
 
     private Runnable clickAction = () -> {};
 
-    private final ButtonItem item;
+    private final Item item;
     private final ItemStack stack;
 
-    public ServerButton(ButtonItem item) {
+    public ServerButton(Item item) {
         this.item = item;
         this.stack = new ItemStack(item);
     }
@@ -51,7 +52,7 @@ public class ServerButton implements GuiElement {
         return clickAction;
     }
 
-    public ButtonItem getButtonItem() {
+    public Item getButtonItem() {
         return item;
     }
 

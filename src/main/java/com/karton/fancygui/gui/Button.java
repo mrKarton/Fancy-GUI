@@ -8,7 +8,7 @@ import net.minecraft.world.item.component.ItemLore;
 
 public class Button {
 
-    private final ButtonItem item;
+    private final Item item;
 
     private Component title = Component.empty();
     private ItemLore caption = ItemLore.EMPTY;
@@ -26,11 +26,11 @@ public class Button {
     private int clientWidth = 18;
     private int clientHeight = 18;
 
-    public Button(ButtonItem item) {
+    public Button(Item item) {
         this.item = item;
     }
 
-    public Button(ButtonItem item, String title) {
+    public Button(Item item, String title) {
         this(item);
         this.title = Component.literal(title);
     }
@@ -72,7 +72,7 @@ public class Button {
         return this;
     }
 
-    public ButtonItem getItem() {
+    public Item getItem() {
         return item;
     }
 
