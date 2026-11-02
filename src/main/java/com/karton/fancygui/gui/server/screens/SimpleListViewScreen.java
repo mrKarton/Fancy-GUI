@@ -72,9 +72,15 @@ public class SimpleListViewScreen extends SimpleSlotScreen implements ListViewGU
         this.items = items;
 
         maxPages = Math.ceilDiv(this.items.size(), 36) - 1;
-        page = 0;
+        if (page > maxPages) {
+            page = maxPages;
+        }
 
-        this.displayItems = getItemsOnPage(0);
+        if (page < 0) {
+            page = 0;
+        }
+
+        this.displayItems = getItemsOnPage(page);
 
         showItems();
     }
